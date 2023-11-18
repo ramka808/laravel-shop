@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\CatalogController;
+//Use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,12 @@ Use App\Http\Controllers\CatalogController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/', [\App\Http\Controllers\IndexController::class, '__invoke'])->name('index');
 
 
 Route::get('/catalog/index', [CatalogController::class, 'index'])->name('catalog.index');
