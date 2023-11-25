@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\CatalogController;
+Use App\Http\Controllers\BasketController;
 //Use App\Http\Controllers\IndexController;
 
 /*
@@ -28,3 +29,10 @@ Route::get('/catalog/category/{slug}', [CatalogController::class, 'category'])
     ->name('catalog.category');
 Route::get('/catalog/brand/{slug}', [CatalogController::class, 'brand'])->name('catalog.brand');
 Route::get('/catalog/product/{slug}', [CatalogController::class, 'product'])->name('catalog.product');
+
+Route::get('/basket/index', [BasketController::class, 'index'])->name('basket.index');
+Route::get('/basket/checkout', [BasketController::class, 'checkout'])->name('basket.checkout');
+
+Route::post('/basket/add/{id}', [BasketController::class, 'add'])
+    ->where('id', '[0-9]+')
+    ->name('basket.add');
