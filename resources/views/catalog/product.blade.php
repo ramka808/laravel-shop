@@ -26,6 +26,9 @@
                             </form>
                         </div>
                     </div>
+
+
+
                     <div class="row">
                         <div class="col-12">
                             <p class="mt-4 mb-0">{{ $product->content }}</p>
