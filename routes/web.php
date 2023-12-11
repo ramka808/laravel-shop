@@ -1,8 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+Use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\CatalogController;
 Use App\Http\Controllers\BasketController;
+Use App\Http\Controllers\UserController;
+Use App\Http\Controllers\Admin\IndexController;
+Use Laravel\Ui\AuthRouteMethods;
+
 //Use App\Http\Controllers\IndexController;
 
 /*
@@ -47,3 +52,15 @@ Route::post('/basket/remove/{id}', [BasketController::class, 'remove'])
     ->name('basket.remove');
 Route::post('/basket/clear', [BasketController::class, 'clear'])->name('basket.clear');
 
+
+Route::name('user.')->prefix('user')->group(function () {
+    Route::get('index', [UserController::class,'index'])->name('index');
+    Auth::routes();
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// первый способ добавления посредников
+Route::namespace('Admin')->name('admin.')->prefix('admin')->middleware('auth', 'admin')->group(function () {
+    Route::get('index', [IndexController::class, 'index'])->name('index');
+});
